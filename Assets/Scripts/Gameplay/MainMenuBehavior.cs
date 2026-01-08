@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
-public class MainMenuBehavior : MonoBehaviour
+public class MainMenuBehavior : MonoBehaviour, IPointerClickHandler
 {
     [Header("UI Elements")]
     [SerializeField] private GameObject howToPlayScreen;
@@ -43,6 +44,18 @@ public class MainMenuBehavior : MonoBehaviour
         if (affirmationsScreen != null)
         {
             affirmationsScreen.SetActive(true);
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if(eventData.pointerEnter.gameObject.name == "HowToPlayScreen")
+        {
+            howToPlayScreen.SetActive(false);
+        }
+        else if (eventData.pointerEnter.gameObject.name == "AffirmationsScreen")
+        {
+            affirmationsScreen.SetActive(false);
         }
     }
 }
