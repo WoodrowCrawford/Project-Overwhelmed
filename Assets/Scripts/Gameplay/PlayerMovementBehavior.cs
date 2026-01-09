@@ -24,6 +24,7 @@ public class PlayerMovementBehavior : MonoBehaviour
         inputActions.Player.Enable();
         inputActions.Player.Sprint.performed += IncreaseSpeed; // Example: Hold sprint to increase speed
         inputActions.Player.Sprint.canceled += SetToNormalSpeed; // Reset speed when sprint is released
+        DarkThoughtsBehavior.OnDarkThoughtHitPlayer += DestroyPlayer;
     }
 
     void OnDisable()
@@ -31,6 +32,7 @@ public class PlayerMovementBehavior : MonoBehaviour
         inputActions.Player.Disable();
         inputActions.Player.Sprint.performed -= IncreaseSpeed;
         inputActions.Player.Sprint.canceled -= SetToNormalSpeed;
+        DarkThoughtsBehavior.OnDarkThoughtHitPlayer -= DestroyPlayer;
     }
 
     void Start()
@@ -109,5 +111,10 @@ public class PlayerMovementBehavior : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().sprite = normalSprite;
         }
+    }
+
+    public void DestroyPlayer()
+    {
+        Destroy(gameObject);
     }
 }

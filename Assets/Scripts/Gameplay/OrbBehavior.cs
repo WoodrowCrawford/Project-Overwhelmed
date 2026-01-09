@@ -17,7 +17,7 @@ public class OrbBehavior : MonoBehaviour
             Debug.Log("Orb collected!");
             OnOrbCollected?.Invoke();
 
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

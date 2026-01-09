@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 3
   tags:
   - OrbSpawnPoint
+  - DarkThought
+  - Teleporter1
+  - Teleporter2
+  - Teleporter3
+  - Teleporter4
   layers:
   - Default
   - TransparentFX
