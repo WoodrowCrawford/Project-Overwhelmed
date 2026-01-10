@@ -6,6 +6,7 @@ public class OrbSpawnerBehavior : MonoBehaviour
 
     public delegate void OrbCounterEventHandler();
     public static event OrbCounterEventHandler OnDestroyDarkThought;
+    public static event OrbCounterEventHandler OnCollectedAllOrbs;
 
     //first get a list of all the orbs
     [SerializeField] private Transform[] orbSpawnPoints;
@@ -91,6 +92,7 @@ public class OrbSpawnerBehavior : MonoBehaviour
          {
                 OnDestroyDarkThought?.Invoke();
                 collected12orbs = true;
+                OnCollectedAllOrbs?.Invoke();
          }
 
 

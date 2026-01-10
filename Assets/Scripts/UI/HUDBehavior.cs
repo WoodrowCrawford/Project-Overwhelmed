@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using System;
 
 public class HUDBehavior : MonoBehaviour
 {
@@ -9,7 +11,9 @@ public class HUDBehavior : MonoBehaviour
     [SerializeField] private GameObject meterFillUI;
 
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject winScreen;
     [SerializeField] private Button tryAgainButton;
+    [SerializeField] private Button restartButton;
 
     public static bool isGameOver = false;
 
@@ -20,14 +24,20 @@ public class HUDBehavior : MonoBehaviour
     {
         OrbBehavior.OnOrbCollected += HandleOrbCollected;
         tryAgainButton.onClick.AddListener(() => SceneManager.LoadScene("MainGameScene"));
+        restartButton.onClick.AddListener(() => SceneManager.LoadScene("MainGameScene"));
         DarkThoughtsBehavior.OnDarkThoughtHitPlayer += ShowGameOverScreen;
+        OrbSpawnerBehavior.OnCollectedAllOrbs += ShowWinScreen;
     }
 
+   
     void OnDisable()
     {
         OrbBehavior.OnOrbCollected -= HandleOrbCollected;
         tryAgainButton.onClick.RemoveAllListeners();
+        restartButton.onClick.RemoveAllListeners();
         DarkThoughtsBehavior.OnDarkThoughtHitPlayer -= ShowGameOverScreen;
+        OrbSpawnerBehavior.OnCollectedAllOrbs -= ShowWinScreen;
+
     }
 
     void Awake()
@@ -54,4 +64,10 @@ public class HUDBehavior : MonoBehaviour
         gameOverScreen.SetActive(true);
         isGameOver = true;
     }
+
+     private void ShowWinScreen()
+    {
+        winScreen.SetActive(true);
+    }
+
 }
